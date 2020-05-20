@@ -34,3 +34,9 @@
 **深拷贝**：拷贝的对象与源对象是完全不相关的两个类
 
 [参考prototype包](https://github.com/plm1025624185/pattern/tree/master/src/main/java/com/plm/pattern/prototype)
+
+## 4.建造者模式
+
+主要使用到了**链式调用**，即每次都返回当前实例
+
+[参考builder包](https://github.com/plm1025624185/pattern/tree/master/src/main/java/com/plm/pattern/builder)
