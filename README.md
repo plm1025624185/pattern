@@ -30,6 +30,7 @@
 ## 3.原型模式
 
 **浅拷贝**：拷贝的对象中如果属性存在引用，那么拷贝对象与源对象之间的对象属性指向同一个引用。
+
 **深拷贝**：拷贝的对象与源对象是完全不相关的两个类
 
 [参考prototype包](https://github.com/plm1025624185/pattern/tree/master/src/main/java/com/plm/pattern/prototype)
