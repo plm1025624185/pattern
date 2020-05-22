@@ -15,6 +15,11 @@ public class JdkDynamicHouseSale implements InvocationHandler {
 
     public JdkDynamicHouseSale(){}
 
+    /**
+     * 获取代理实例
+     * @param obj
+     * @return
+     */
     public Object getInstance(Object obj) {
         this.proxyObj = obj;
         Class<?> clazz = obj.getClass();
