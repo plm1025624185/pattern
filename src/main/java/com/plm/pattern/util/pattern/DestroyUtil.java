@@ -1,4 +1,4 @@
-package com.plm.pattern.singleton;
+package com.plm.pattern.util.pattern;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -1,5 +1,12 @@
 package com.plm.pattern.util.dgc.wrapper;
 
-public class IDgcPackageWrapper {
-
+/**
+ * 包名包装类
+ */
+public interface IDgcPackageWrapper {
+    /**
+     * 获取包名
+     * @return
+     */
+    String getName();
 }

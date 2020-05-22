@@ -1,6 +1,6 @@
 package com.plm.pattern.prototype;
 
-import com.plm.pattern.singleton.DestroyUtil;
+import com.plm.pattern.util.pattern.DestroyUtil;
 
 import java.io.IOException;
 import java.io.Serializable;

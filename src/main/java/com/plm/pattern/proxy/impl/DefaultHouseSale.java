@@ -13,6 +13,5 @@ public class DefaultHouseSale implements IHouseSale {
     public Integer saleHourse() {
         Random random = new Random();
         return random.nextInt(100);
-        System.arraycopy();
     }
 }

@@ -1,6 +1,13 @@
 package com.plm.pattern.util.dgc.wrapper;
 
+import java.util.Set;
+
+/**
+ * 约定只处理字段修饰符为private类型的
+ */
 public interface IDgcFieldWrapper {
+
+	String PREFIX_NAME = "f";
 	
 	/**
 	 * 获取字段名称
@@ -19,4 +26,10 @@ public interface IDgcFieldWrapper {
 	 * @return
 	 */
 	String getSimpleTypeName();
+
+	/**
+	 * 获取字段的关键字
+	 * @return
+	 */
+	Set<String> listKeyWords();
 }

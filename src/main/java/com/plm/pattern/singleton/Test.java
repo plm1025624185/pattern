@@ -1,5 +1,7 @@
 package com.plm.pattern.singleton;
 
+import com.plm.pattern.util.pattern.DestroyUtil;
+
 /**
  * @author 潘磊明
  * @date 2020/5/19

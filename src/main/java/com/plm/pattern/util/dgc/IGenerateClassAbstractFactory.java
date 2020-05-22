@@ -47,4 +47,6 @@ public interface IGenerateClassAbstractFactory {
 	 */
 	List<IDgcMethodWrapper> generateMethods();
 
+	
+
 }
