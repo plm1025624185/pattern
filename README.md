@@ -40,3 +40,31 @@
 主要使用到了**链式调用**，即每次都返回当前实例
 
 [参考builder包](https://github.com/plm1025624185/pattern/tree/master/src/main/java/com/plm/pattern/builder)
+
+## 5.代理模式
+
+[参考proxy包](https://github.com/plm1025624185/pattern/tree/master/src/main/java/com/plm/pattern/proxy)
+
+### 5.1.静态代理实现
+
+[参考StaticProxyHouseSale](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/proxy/impl/StaticProxyHouseSale.java)
+
+### 5.1.2.JDK动态代理实现
+
+[参考JdkDynamicHouseSale](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/proxy/impl/JdkDynamicHouseSale.java)
+
+### 5.1.3.手写JDK动态代理实现思路
+
+1. 用Java动态生成代理类的Java源码;
+2. 将Java源码输出到磁盘上保存;
+3. 将生成的.java文件进行编译，生成.class文件;
+4. 将生成的.class文件加载进JVM中;
+5. 返回动态生成的代理类
+
+[手写JDK动态代理参考myjdkproxy包](https://github.com/plm1025624185/pattern/tree/master/src/main/java/com/plm/pattern/proxy/myjdkproxy)
+
+[动态生成Java代理类流程参考MyJdkProxy的newProxyInstance方法](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/proxy/myjdkproxy/MyJdkProxy.java)
+
+[编译java文件参考JavaCompilerUtil](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/util/compile/JavaCompilerUtil.java)
+
+[动态生成Java源码参考dgc包](https://github.com/plm1025624185/pattern/tree/master/src/main/java/com/plm/pattern/util/dgc)
