@@ -3,10 +3,12 @@ package com.plm.pattern.util.dgc;
 import java.util.List;
 
 import com.plm.pattern.util.dgc.wrapper.IDgcClassNameWrapper;
+import com.plm.pattern.util.dgc.wrapper.IDgcConstructMethodWrapper;
 import com.plm.pattern.util.dgc.wrapper.IDgcFieldWrapper;
 import com.plm.pattern.util.dgc.wrapper.IDgcImportPackageWrapper;
 import com.plm.pattern.util.dgc.wrapper.IDgcMethodWrapper;
 import com.plm.pattern.util.dgc.wrapper.IDgcPackageWrapper;
+import com.plm.pattern.util.dgc.wrapper.IDgcStaticWrapper;
 
 /**
  * 动态生成Java类的工厂，这里使用抽象工厂模式，
@@ -27,7 +29,7 @@ public interface IGenerateClassAbstractFactory {
 	 * 生成引用包
 	 * @return
 	 */
-	List<IDgcImportPackageWrapper> generateImportPackages();
+	IDgcImportPackageWrapper generateImportPackage();
 	
 	/**
 	 * 生成类名
@@ -39,14 +41,24 @@ public interface IGenerateClassAbstractFactory {
 	 * 生成私有属性
 	 * @return
 	 */
-	List<IDgcFieldWrapper> generateFields();
+	List<? extends IDgcFieldWrapper> generateFields();
+	
+	/**
+	 * 生成构造方法
+	 * @return
+	 */
+	List<? extends IDgcConstructMethodWrapper> generateConstructMethods();
 	
 	/**
 	 * 生成方法
 	 * @return
 	 */
-	List<IDgcMethodWrapper> generateMethods();
+	List<? extends IDgcMethodWrapper> generateMethods();
 
-	
+	/**
+	 * 生成静态块
+	 * @return
+	 */
+	IDgcStaticWrapper generateStaticMethods();
 
 }

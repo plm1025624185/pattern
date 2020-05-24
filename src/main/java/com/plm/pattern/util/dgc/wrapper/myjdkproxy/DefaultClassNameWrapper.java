@@ -2,7 +2,6 @@ package com.plm.pattern.util.dgc.wrapper.myjdkproxy;
 
 import com.plm.pattern.util.dgc.wrapper.IDgcClassNameWrapper;
 
-import java.net.URL;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;

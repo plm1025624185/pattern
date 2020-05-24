@@ -10,11 +10,11 @@ public interface IDgcImportPackageWrapper {
      * 获取导入包的全名
      * @return
      */
-    String getImportName();
+    Set<String> listImportNames();
 
     /**
      * 获取关键字
      * @return
      */
-    Set<String> getKeyWords();
+    Set<String> listKeyWords();
 }

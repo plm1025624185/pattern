@@ -11,7 +11,7 @@
 1. 使用反射可以进行破坏
 2. 使用反序列化可以破坏
 
-[参考singleton下的DestroyUtil类](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/singleton/DestroyUtil.java)
+[参考util下的DestroyUtil类](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/util/pattern/DestroyUtil.java)
 
 ### 如何防御ObjectInputStream的序列化
 

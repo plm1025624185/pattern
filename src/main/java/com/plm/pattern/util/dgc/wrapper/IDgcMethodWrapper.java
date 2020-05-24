@@ -48,5 +48,29 @@ public interface IDgcMethodWrapper {
      * 获取关键字
      * @return
      */
-    Set<String> getKeyWords();
+    Set<String> listKeyWords();
+    
+    /**
+     * 获取方法体内容
+     * @return
+     */
+    String getContent();
+    
+    /**
+     * 获取异常信息
+     * @return
+     */
+    List<String> listThrowablesName();
+    
+    /**
+     * 获取异常信息
+     * @return
+     */
+    List<String> listThrowableSimpleName();
+    
+    /**
+     * 获取方法体中所有引用的包
+     * @return
+     */
+    List<String> listContentImportClasses();
 }
