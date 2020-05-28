@@ -3,22 +3,17 @@ package com.plm.pattern.singleton;
 /**
  * 懒汉模式
  * @author 潘磊明
- * @date 2020/5/19
+ * @date 2020/5/28
  */
 public class LazySingleton {
+    private static LazySingleton instance;
 
-    private static volatile LazySingleton singleton;
-
-    private LazySingleton() {}
+    private LazySingleton(){}
 
     public static LazySingleton getInstance() {
-        if (singleton == null) {
-            synchronized (LazySingleton.class) {
-                if (singleton == null) {
-                    singleton = new LazySingleton();
-                }
-            }
+        if (instance == null) {
+            instance = new LazySingleton();
         }
-        return singleton;
+        return instance;
     }
 }

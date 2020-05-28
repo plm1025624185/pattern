@@ -1,19 +1,128 @@
 # 设计模式
 
+## 目录
+
+<a href="#Singleton">1.单例模式</a>
+
+<a id="Singleton" name="Singleton"></a>
 ## 1.单例模式（创建型设计模式）
 
-### 单例的几种方式
+## 适用场景
+
+确保任何情况下都绝对只有一个实例
+
+## 类图
+
+![Singleton](http://processon.com/chart_image/5ecf3a1ae0b34d5f263709b9.png)
+
+## 优点
+
+1. 在内存中只有一个实例，减少了内存开销；
+2. 可以避免对资源的多重占用；
+3. 设置全局访问点，严格控制访问；
+
+## 缺点
+
+1. 没有接口，扩展困难；
+2. 如果要扩展单例对象，只有修改代码；
+
+## 单例的几种方式
+
+|方式|优点|缺点|能否被单例破坏|能否被反序列化破坏|
+|:-:|:-|:-|:-|:-|
+|饿汉模式|执行效率高，性能高，没有加锁|某些情况下造成内存浪费|能|能|
+|懒汉模式|节省内存|线程不安全|能|能|
+|加同步锁模式|解决懒汉模式的线程不安全问题|性能低|能|能|
+|双重检查模式|性能高，线程安全|可读性难度加大，不够优雅|能|能|
+|静态内部私有类模式|写法优雅，利用了java本身语法特点|能够被反射破坏|能|能|
+|枚举单例模式|更优雅的写法|不能大量的创建对象引起内存浪费|不能|不能|
 
 [参考singleton包](https://github.com/plm1025624185/pattern/tree/master/src/main/java/com/plm/pattern/singleton)
 
-### 如何破坏单例
+## 如何破坏单例
 
 1. 使用反射可以进行破坏
 2. 使用反序列化可以破坏
 
 [参考util下的DestroyUtil类](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/util/pattern/DestroyUtil.java)
 
-### 如何防御ObjectInputStream的序列化
+## 为什么枚举式不会被反射和序列化破坏
+
+### 枚举式不会被反射破坏
+
+看Constructor类中的newInstance方法：
+
+```
+public T newInstance(Object ... initargs)
+		throws InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException
+{
+	if (!override) {
+		if (!Reflection.quickCheckMemberAccess(clazz, modifiers)) {
+			Class<?> caller = Reflection.getCallerClass();
+			checkAccess(caller, clazz, null, modifiers);
+		}
+	}
+	// 如果被enum关键字修饰，调用实例化方法会直接抛出异常，所以可以防范反射
+	if ((clazz.getModifiers() & Modifier.ENUM) != 0)
+		throw new IllegalArgumentException("Cannot reflectively create enum objects");
+	ConstructorAccessor ca = constructorAccessor;   // read volatile
+	if (ca == null) {
+		ca = acquireConstructorAccessor();
+	}
+	@SuppressWarnings("unchecked")
+	T inst = (T) ca.newInstance(initargs);
+	return inst;
+}
+```
+
+### 枚举式不会被序列化破坏
+
+枚举类序列化读取流程图：
+
+![枚举类序列化读取流程图](http://processon.com/chart_image/5ecf78425653bb79c1094fe9.png)
+
+根据以上流程，可以发现核心方法是`Enum.valueOf((Class)cl, name)`，代码如下：
+
+```
+// Enum.valueOf((Class)cl, name)
+public static <T extends Enum<T>> T valueOf(Class<T> enumType,
+                                                String name) {
+	// 会去查找枚举类中对应键值的实例
+	T result = enumType.enumConstantDirectory().get(name);
+	if (result != null)
+		return result;
+	if (name == null)
+		throw new NullPointerException("Name is null");
+	throw new IllegalArgumentException(
+		"No enum constant " + enumType.getCanonicalName() + "." + name);
+}
+
+// enumType.enumConstantDirectory()方法
+// 这里使用了懒加载，缺点也是在这里，加载的时候一次性将该枚举类下的实例全部加载进来了
+// 这里可以看做使用了容器式单例模式，所以返回的永远是一个单例
+Map<String, T> enumConstantDirectory() {
+	if (enumConstantDirectory == null) {
+		T[] universe = getEnumConstantsShared();
+		if (universe == null)
+			throw new IllegalArgumentException(
+				getName() + " is not an enum type");
+		Map<String, T> m = new HashMap<>(2 * universe.length);
+		for (T constant : universe)
+			m.put(((Enum<?>)constant).name(), constant);
+		enumConstantDirectory = m;
+	}
+	return enumConstantDirectory;
+}
+```
+
+## 其他模式如何防御反射
+
+只需在构造方法中进行判断，如果实例已存在，则抛出异常，或直接返回实例
+
+[可参考singleton下的PrivateStaticSingleton类](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/singleton/PrivateStaticSingleton.java)
+
+## 其他模式如何防御ObjectInputStream的序列化
 
 首先可以看下反序列化流程：
 
@@ -22,6 +131,10 @@
 防止ObjectInputStream反序列：
 
 [可参考singleton下的HungrySingleton类](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/singleton/HungrySingleton.java)
+
+## 源码中有哪些
+
+ServletContext，ServletConfig，ApplicationContext
 
 ## 2.工厂相关模式（创建型设计模式）
 

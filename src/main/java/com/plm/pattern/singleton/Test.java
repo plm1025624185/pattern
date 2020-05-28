@@ -31,10 +31,13 @@ public class Test {
 //        else System.out.println("不是单例模式");
 
         // -----------------枚举单例模式---------------
-//        EnumSingleton es1 = EnumSingleton.INSTANCE;
-//        EnumSingleton es2 = EnumSingleton.INSTANCE;
-//        if (es1 == es2) System.out.println("是单例模式");
-//        else System.out.println("不是单例模式");
+        EnumSingleton es1 = EnumSingleton.INSTANCE;
+        EnumSingleton es2 = EnumSingleton.INSTANCE;
+        if (es1 == es2) System.out.println("是单例模式");
+        else System.out.println("不是单例模式");
+        EnumSingleton es3 = DestroyUtil.objectStream(es1);
+        if (es1 == es3) System.out.println("序列化打破单例模式失败");
+        else System.out.println("序列化成功打破单例模式");
 
         // -----------------静态内部类单例模式----------------
 //        PrivateStaticSingleton pss1 = PrivateStaticSingleton.getInstance();

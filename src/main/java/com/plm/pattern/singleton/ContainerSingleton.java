@@ -13,13 +13,11 @@ public class ContainerSingleton {
 
     private ContainerSingleton(){}
 
-    public static void registerInstance(String key, Object obj) throws Exception {
-        if (map.containsKey(key)) throw new Exception("当前key已经有实例化对象了");
-        map.put(key, obj);
-    }
-
     public static Object getInstance(String key) throws Exception {
-        if (!map.containsKey(key)) throw new Exception("当前key不存在实例化对象");
-        return map.get(key);
+        Object instance = null;
+        if (map.containsKey(key)) return map.get(key);
+        instance = Class.forName(key).newInstance();
+        map.put(key, instance);
+        return instance;
     }
 }

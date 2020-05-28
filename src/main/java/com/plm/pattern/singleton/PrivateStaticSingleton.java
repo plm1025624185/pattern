@@ -6,13 +6,18 @@ package com.plm.pattern.singleton;
  * @date 2020/5/19
  */
 public class PrivateStaticSingleton {
-    private PrivateStaticSingleton(){}
+
+
+    private PrivateStaticSingleton(){
+        if (PrivateStaticSingletonSupport.singleton != null)
+            throw new RuntimeException("实例已被初始化！");
+    }
 
     public static PrivateStaticSingleton getInstance() {
         return PrivateStaticSingletonSupport.singleton;
     }
 
     private static class PrivateStaticSingletonSupport {
-        private static PrivateStaticSingleton singleton = new PrivateStaticSingleton();
+        private final static PrivateStaticSingleton singleton = new PrivateStaticSingleton();
     }
 }
