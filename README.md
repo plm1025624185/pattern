@@ -3,8 +3,9 @@
 ## 目录
 
 <a href="#Singleton">1.单例模式</a>
+<a href="#Factory">2.工厂模式</a>
 
-<a id="Singleton" name="Singleton"></a>
+<a id="Singleton" name="Singleton"/>
 ## 1.单例模式（创建型设计模式）
 
 ### 适用场景
@@ -136,7 +137,25 @@ Map<String, T> enumConstantDirectory() {
 
 ServletContext，ServletConfig，ApplicationContext
 
+<a id="Factory" name="Factory" />
 ## 2.工厂相关模式（创建型设计模式）
+
+### 类图
+
+**简单工厂模式**
+
+![SimpleFactory](http://processon.com/chart_image/5d674840e4b01acbdb8b9fd2.png)
+
+**工厂方法模式**
+
+![Factory](http://processon.com/chart_image/5ecfa9b61e08530a9b294d8f.png)
+
+### 总结
+
+|模式|适用场景|优点|缺点|例子|
+|:-:|:-|:-|:-|
+|简单工厂模式|适合创建较少对象|只需传入一个正确参数，就可以获取所需要的对象，无须知道创建细节|职责相对过重，增加新的产品需要修改工厂类的判断逻辑，违背开闭原则；<br/>不易于扩展复杂的产品结构；|Calender，LoggerFactory|
+|工厂方法模式|创建对象需要大量重复代码;<br/>客户端（应用层）不依赖于产品实例如何被创建，实现等细节；<br/>一个类通过其子类来指定创建哪个对象；|用户只需关心所需产品对应的工厂，无需关心创建细节；<br/>加入新产品符合开闭原则，提高了系统的可扩展性；|类的个数容易过多，增加代码结构的复杂度；<br/>增加了系统的抽象性和理解难度；||
 
 [参考factory包](https://github.com/plm1025624185/pattern/tree/master/src/main/java/com/plm/pattern/factory)
 
