@@ -7,26 +7,26 @@
 <a id="Singleton" name="Singleton"></a>
 ## 1.单例模式（创建型设计模式）
 
-## 适用场景
+### 适用场景
 
 确保任何情况下都绝对只有一个实例
 
-## 类图
+### 类图
 
 ![Singleton](http://processon.com/chart_image/5ecf3a1ae0b34d5f263709b9.png)
 
-## 优点
+### 优点
 
 1. 在内存中只有一个实例，减少了内存开销；
 2. 可以避免对资源的多重占用；
 3. 设置全局访问点，严格控制访问；
 
-## 缺点
+### 缺点
 
 1. 没有接口，扩展困难；
 2. 如果要扩展单例对象，只有修改代码；
 
-## 单例的几种方式
+### 单例的几种方式
 
 |方式|优点|缺点|能否被单例破坏|能否被反序列化破坏|
 |:-:|:-|:-|:-|:-|
@@ -39,16 +39,16 @@
 
 [参考singleton包](https://github.com/plm1025624185/pattern/tree/master/src/main/java/com/plm/pattern/singleton)
 
-## 如何破坏单例
+### 如何破坏单例
 
 1. 使用反射可以进行破坏
 2. 使用反序列化可以破坏
 
 [参考util下的DestroyUtil类](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/util/pattern/DestroyUtil.java)
 
-## 为什么枚举式不会被反射和序列化破坏
+### 为什么枚举式不会被反射和序列化破坏
 
-### 枚举式不会被反射破坏
+#### 枚举式不会被反射破坏
 
 看Constructor类中的newInstance方法：
 
@@ -76,7 +76,7 @@ public T newInstance(Object ... initargs)
 }
 ```
 
-### 枚举式不会被序列化破坏
+#### 枚举式不会被序列化破坏
 
 枚举类序列化读取流程图：
 
@@ -116,13 +116,13 @@ Map<String, T> enumConstantDirectory() {
 }
 ```
 
-## 其他模式如何防御反射
+### 其他模式如何防御反射
 
 只需在构造方法中进行判断，如果实例已存在，则抛出异常，或直接返回实例
 
 [可参考singleton下的PrivateStaticSingleton类](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/singleton/PrivateStaticSingleton.java)
 
-## 其他模式如何防御ObjectInputStream的序列化
+### 其他模式如何防御ObjectInputStream的序列化
 
 首先可以看下反序列化流程：
 
@@ -132,7 +132,7 @@ Map<String, T> enumConstantDirectory() {
 
 [可参考singleton下的HungrySingleton类](https://github.com/plm1025624185/pattern/blob/master/src/main/java/com/plm/pattern/singleton/HungrySingleton.java)
 
-## 源码中有哪些
+### 源码中有哪些单例模式
 
 ServletContext，ServletConfig，ApplicationContext
 
